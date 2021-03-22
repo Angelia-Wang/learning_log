@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-</head>
-<body>
 {% extends "learning_logs/base.html" %}
-{% block content %}
-    <p>学习笔记帮助你记录你所学习的任何主题，以及相关主题的所有条目</p>
-{% endblock content %}
-</body>
-</html>
+{% block page_header %}
+    <div class="jumbotron">
+        <h1 class="display-3">跟踪你的学习。</h1>
+
+        <p class="lead">制作你自己的学习日志，并把你正在学习的主题列成一个清单。每当你学到了关于某个主题的新知识时，就把你所学的总结下来。</p>
+
+        <a href="{% url 'users:register' %}" class="btn btn-lg btn-primary" role="button">注册 &raquo;</a>
+    </div>
+{% endblock page_header %}

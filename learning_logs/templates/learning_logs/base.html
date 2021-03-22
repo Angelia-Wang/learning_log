@@ -1,12 +1,71 @@
-<p>
-    <a href="{% url 'learning_logs:index' %}">学习笔记</a> -
-    <a href="{% url 'learning_logs:topics' %}">主题</a> -
-    {% if user.is_authenticated %}
-        你好，{{ user.username }}
-        <a href="{% url 'users:logout' %}"> 注销</a>
-    {% else %}
-        <a href="{% url 'users:register' %}">注册</a>
-        <a href="{% url 'users:login' %}">登录</a>
-    {% endif %}
-</p>
-{% block content %}{% endblock content %}
+{#<p>#}
+{#    <a href="{% url 'learning_logs:index' %}">学习笔记</a> -#}
+{#    <a href="{% url 'learning_logs:topics' %}">主题</a> -#}
+{#    {% if user.is_authenticated %}#}
+{#        你好，{{ user.username }}#}
+{#        <a href="{% url 'users:logout' %}"> 注销</a>#}
+{#    {% else %}#}
+{#        <a href="{% url 'users:register' %}">注册</a>#}
+{#        <a href="{% url 'users:login' %}">登录</a>#}
+{#    {% endif %}#}
+{#</p>#}
+{#{% block content %}{% endblock content %}#}
+
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学习笔记</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-4 color">
+    <!-- Brand -->
+    <a href="{% url 'learning_logs:index' %}" class="navbar-brand">学习笔记</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="{% url 'learning_logs:topics' %}" class="nav-link">主题</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <span class="navbar-text">你好，{{ user.username }}</span>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'users:logout' %}" class="nav-link">注销</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'users:register' %}" class="nav-link">注册</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'users:login' %}" class="nav-link">登录</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<main role="main" class="container">
+    <div class="pb-2 mb-2 border-bottom">
+        {% block page_header %}{% endblock page_header %}
+    </div>
+    <div>
+        {% block content %}{% endblock content %}
+    </div>
+</main>
+</body>
+</html>
